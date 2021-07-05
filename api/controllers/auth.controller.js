@@ -25,7 +25,6 @@ exports.login = (req, res) => {
             process.env.SECRET,
             { expiresIn: '8h' }
           )
-
           return res.status(200).json({ token: token, ...userData })
         })
     })
@@ -58,6 +57,9 @@ exports.signUp = (req, res) => {
         process.env.SECRET,
         { expiresIn: '48h' }
       )
+      console.log('token: ', token)
+      console.log('userData: ', userData)
+
       res.status(201).json({ token: token, ...userData })
     })
     .catch(err => {
