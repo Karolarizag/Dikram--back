@@ -6,7 +6,6 @@ const jwt = require('jsonwebtoken')
 exports.checkAuth = (req, res, next) => {
   jwt.verify(req.headers.token, process.env.SECRET, (err, token) => {
     if (err) {
-      console.log(err)
       res.status(403).json({ error: 'Token not valid' })
     } else {
       userModel
@@ -27,16 +26,19 @@ exports.checkAuth = (req, res, next) => {
   })
 }
 
-exports.authSeller = roles => {
-  return (req, res, next) => {
-    if (user.role === 'seller') { next() }
+exports.authSeller =  (req, res, next) => {
+    if (res.locals.user.role === 'seller') {
+      next() 
+    } else {
     res.status(403).send('Access denied')
-  }
+    }
 }
-exports.authAdmin = roles => {
-  return (req, res, next) => {
-    if (user.role === 'admin') { next() }
+
+exports.authAdmin = (req, res, next) => {
+    if (res.locals.user.role === 'admin') {
+      next() 
+    } else {
     res.status(403).send('Access denied')
-  }
+    }
 }
 
