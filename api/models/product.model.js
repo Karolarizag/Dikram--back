@@ -14,7 +14,10 @@ const productSchema = new mongoose.Schema({
     ref: 'comments'
   }],
   quantity: Number,
-  rate: Number,
+  rate: {
+    type: Number,
+    default: 0
+  },
   customizable: Boolean,
   // customForm: [customSchema],
   date: {
