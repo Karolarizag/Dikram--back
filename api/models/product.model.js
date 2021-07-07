@@ -24,7 +24,11 @@ const productSchema = new mongoose.Schema({
     type: Date,
     default: Date.now()
   },
-  reports: Array
+  reports: Array,
+  sizes: Array,
+  colors: Array,
+  materials: Array,
+  tags: Array
 })
 
 exports.productModel = mongoose.model('product', productSchema)
