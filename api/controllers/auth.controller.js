@@ -3,14 +3,16 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
 exports.login = (req, res) => {
+  
   userModel
     .findOne({ email: req.body.email })
     .then(user => {
       if (!user) {
-        return res.json({ error: 'Wrong ' })
+        return res.status(401).json({ error: 'Wrong user not exists' })
       }
       bcrypt.compare(req.body.password, user.password,
         (err, result) => {
+
           if (!result) {
             return res.status(401).json({ error: 'Wrong email or password', err })
           }
