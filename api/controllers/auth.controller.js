@@ -18,7 +18,7 @@ exports.login = (req, res) => {
             username: user.username,
             email: user.email,
             id: user._id,
-            role: req.body.role
+            role: user.role
           }
           const token = jwt.sign(
             userData,

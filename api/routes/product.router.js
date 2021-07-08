@@ -11,8 +11,8 @@ const { checkAuth, authSeller, authAdmin } = require('../../utils/index')
 
 router
   .post('/', checkAuth, authSeller, createProduct)
-  .get('/',checkAuth, getAllProduct)
-  .get('/:productId', checkAuth, authSeller, getProductById)
+  .get('/', getAllProduct)
+  .get('/:productId', getProductById)
   .put('/:productId', checkAuth, authSeller, updateProduct)
   .delete('/:productId', checkAuth, authSeller, deleteProduct)
 
