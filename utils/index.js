@@ -4,8 +4,9 @@ const jwt = require('jsonwebtoken')
 
 
 exports.checkAuth = (req, res, next) => {
-  console.log('llega al ')
-  jwt.verify(req.headers.token, process.env.SECRET, (err, token) => {
+  console.log(req.headers)
+  const token = req.headers.authorization.split(' ')[1]
+  jwt.verify(token, process.env.SECRET, (err, token) => {
     if (err) {
       res.status(403).json({ error: 'Token not valid' })
     } else {

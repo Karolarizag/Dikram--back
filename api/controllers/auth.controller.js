@@ -1,6 +1,7 @@
 const { userModel } = require('../models/user.model')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
+const { checkAuth } = require('../../utils/index')
 
 exports.login = (req, res) => {
   
@@ -68,4 +69,9 @@ exports.signUp = (req, res) => {
       console.log(err)
       res.status(400).json({ error: 'Error' })
     })
+}
+
+exports.whoami = (req, res) => {
+  console.log(res.locals.user)
+  res.status(200).json({user: res.locals.user})
 }
