@@ -29,7 +29,7 @@ const userSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'sale'
   }],
-  wishList: [{
+  wishlist: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'product'
   }],

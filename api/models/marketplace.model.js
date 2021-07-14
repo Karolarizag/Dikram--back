@@ -5,13 +5,14 @@ const marketPlaceSchema = new mongoose.Schema ({
     type: String,
     unique: true
   },
+  description: String,
   seller: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'user'
   },
   carousel: [String],
-  profileImage: String,
-  bannerImage: String,
+  profileimage: String,
+  bannerimage: String,
   posts: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'post'
