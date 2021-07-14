@@ -48,12 +48,6 @@ exports.signUp = async (req, res) => {
       birthdate: req.body.birthdate,
       role: req.body.role
     })
-}
-
-exports.whoami = (req, res) => {
-  console.log(res.locals.user)
-  res.status(200).json({user: res.locals.user})
-}
 
     const userData = {
       username: user.username,
@@ -72,4 +66,9 @@ exports.whoami = (req, res) => {
   } catch (err) {
     res.status(400).json({ error: 'Error' })
   }
+}
+
+exports.whoami = (req, res) => {
+  console.log(res.locals.user)
+  res.status(200).json({user: res.locals.user})
 }
