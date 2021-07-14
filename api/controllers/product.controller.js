@@ -1,18 +1,38 @@
 const { productModel } = require('../models/product.model')
+const { marketPlaceModel } = require('../models/marketplace.model')
 
-exports.createProduct = (req, res) => {
-  productModel
-    .create(req.body)
-    .then(product => {
-      product.marketplace.push(res.locals.user.marketplace._id)
-      res.locals.user.marketplace.products.push(product._id)
-      res.locals.user
-        .save()
-        .then(user => res.status(200).json(product))
-        .catch(err => res.status(500).json({ msg: 'Ha ocurrido un error al crear el producto', err }))
-    })
-    .catch(err => res.status(500).json({ msg: 'Ha ocurrido un error al crear el producto', err }))
+
+/* PENDING TESTING */
+exports.createProduct = async (req, res) => {
+  try {
+    const product = await productModel.create(req.body)
+    product.marketplace = res.locals.user.marketplace
+    const marketplace = await marketPlaceModel.findById(res.locals.user.marketplace)
+    marketplace.products.push(product.id)
+    await marketplace.save()
+    await product.save()
+
+    res.status(200).json(product)
+  } catch (err) {
+    console.log(err)
+    res.status(500).json({ msg: 'Ha ocurrido un error al crear el producto', err })
+  }
+
 }
+
+// exports.createProduct = (req, res) => {
+//   productModel
+//     .create(req.body)
+//     .then(product => {
+//       product.marketplace.push(res.locals.user.marketplace._id)
+//       res.locals.user.marketplace.products.push(product._id)
+//       res.locals.user
+//         .save()
+//         .then(user => res.status(200).json(product))
+//         .catch(err => res.status(500).json({ msg: 'Ha ocurrido un error al crear el producto', err }))
+//     })
+//     .catch(err => res.status(500).json({ msg: 'Ha ocurrido un error al crear el producto', err }))
+// }
 
 exports.getAllProduct = (req, res) => {
   productModel
