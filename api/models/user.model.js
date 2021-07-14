@@ -35,11 +35,15 @@ const userSchema = new mongoose.Schema({
   }],
   followed: [{
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'marketPlace'
+    ref: 'marketplace'
   }],
   // address: adressSchema,
   notifications: [String],
-  reports: [String]
+  reports: [String],
+  marketplace: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'marketplace'
+  }
 })
 
 exports.userModel = mongoose.model('user', userSchema)

@@ -4,9 +4,14 @@ exports.createProduct = (req, res) => {
   productModel
     .create(req.body)
     .then(product => {
-      res.status(200).json(product)
+      product.marketplace.push(res.locals.user.marketplace._id)
+      res.locals.user.marketplace.products.push(product._id)
+      res.locals.user
+        .save()
+        .then(user => res.status(200).json(product))
+        .catch(err => res.status(500).json({ msg: 'Ha ocurrido un error al crear el producto', err }))
     })
-    .catch(err => res.status(500).json({ msg: 'An error ocurred trying to create a product', err }))
+    .catch(err => res.status(500).json({ msg: 'Ha ocurrido un error al crear el producto', err }))
 }
 
 exports.getAllProduct = (req, res) => {
