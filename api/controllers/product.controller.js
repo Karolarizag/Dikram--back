@@ -40,7 +40,6 @@ exports.getProductById = async (req, res) => {
   } catch (err) {
     res.status(500).json(err)
   }
-
 }
 
 exports.updateProduct = async (req, res) => {
@@ -55,11 +54,9 @@ exports.updateProduct = async (req, res) => {
 exports.deleteProduct = async (req, res) => {
   try {
     const product = await productModel.findByIdAndDelete(req.params.productId)
-
     const marketPlace = await marketPlaceModel.findById(res.locals.user.marketplace)
 
-    const index = marketPlace.products.indexOf(req.params.productId)
-    marketPlace.products.splice(index, 1)
+    marketPlace.products.remove(req.params.productId)
     await marketPlace.save()
     
     res.status(200).json({ msg: 'Producto eliminado', product })
