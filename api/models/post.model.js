@@ -16,6 +16,10 @@ const commentSchema = new mongoose.Schema({
 
 
 const postSchema = new mongoose.Schema({
+  marketplace: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'marketplace'
+  },
   imagen: [String],
   description: String,
   comments: [commentSchema],

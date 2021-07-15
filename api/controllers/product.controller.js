@@ -7,9 +7,9 @@ exports.createProduct = async (req, res) => {
   try {
     const product = await productModel.create(req.body)
     product.marketplace = res.locals.user.marketplace
-    console.log('res local', res.locals)
+
     const marketplace = await marketPlaceModel.findById(res.locals.user.marketplace)
-    console.log(marketplace)
+
     marketplace.products.push(product.id)
     await marketplace.save()
     await product.save()

@@ -3,6 +3,8 @@ const { postModel}= require('../models/post.model')
 exports.createPost = async (req, res) => {
   try {
     const post = await postModel.create(req.body)
+    post.marketplace = res.locals.user.marketplace
+    await post.save()
     res.status(200).json({ msg: 'Post creado correctamente', post })
   } catch (error) {
     res.status(500).json(error)  
