@@ -72,3 +72,4 @@ exports.whoami = (req, res) => {
   console.log(res.locals.user)
   res.status(200).json({user: res.locals.user})
 }
+
