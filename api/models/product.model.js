@@ -1,5 +1,20 @@
 const mongoose = require('mongoose')
 
+
+const commentSchema = new mongoose.Schema({
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'user'
+  },
+  rate: Number,
+  description: String,
+  date: {
+    type: Date,
+    default: Date.now()
+  },
+  reports: [String]
+})
+
 const productSchema = new mongoose.Schema({
   name: String,
   image: Array,
@@ -9,10 +24,7 @@ const productSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'marketplace'
   },
-  comments: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'comments'
-  }],
+  comments: [commentSchema],
   quantity: Number,
   rate: {
     type: Number,
@@ -30,5 +42,7 @@ const productSchema = new mongoose.Schema({
   materials: Array,
   tags: Array
 })
+
+
 
 exports.productModel = mongoose.model('product', productSchema)

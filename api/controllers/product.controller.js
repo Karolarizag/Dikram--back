@@ -7,12 +7,12 @@ exports.createProduct = async (req, res) => {
   try {
     const product = await productModel.create(req.body)
     product.marketplace = res.locals.user.marketplace
-    product.save()
+    await product.save()
 
     const marketPlace = await marketPlaceModel.findById(res.locals.user.marketplace)
     marketPlace.products.push(product.id)
     await marketPlace.save()
-
+    
     res.status(200).json(product)
 
   } catch (err) {
