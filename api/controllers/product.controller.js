@@ -33,6 +33,15 @@ exports.getAllProduct = async (req, res) => {
   }
 }
 
+exports.getProductsByMarketplace = async (req, res) => {
+  try {
+    const products = await productModel.find({ marketplace: req.params.marketplaceId })
+    res.status(200).json(products)
+  } catch (err) {
+    res.status(200).json({ msg: 'Error trying to get this products', err })
+  }
+}
+
 exports.getProductById = async (req, res) => {
   try {
     const product = await productModel.findById(req.params.productId)
