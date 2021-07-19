@@ -5,7 +5,6 @@ const {
   updateProduct,
   deleteProduct,
   getAllProduct,
-  getProductsByMarketplace
 } = require('../controllers/product.controller')
 
 const { checkAuth, authSeller, authAdmin } = require('../../utils/index')
@@ -13,7 +12,6 @@ const { checkAuth, authSeller, authAdmin } = require('../../utils/index')
 router
   .post('/', checkAuth, authSeller, createProduct)
   .get('/', getAllProduct)
-  .get('/:marketplaceId', getProductsByMarketplace)
   .get('/:productId', getProductById)
   .put('/:productId', checkAuth, authSeller, updateProduct)
   .delete('/:productId', checkAuth, authSeller, deleteProduct)

@@ -1,4 +1,5 @@
 const { marketPlaceModel } = require('../models/marketplace.model')
+const { productModel } = require('../models/product.model')
 
 // MARKETPLACE CRUD
 
@@ -57,5 +58,14 @@ exports.deleteMarketPlace = async (req, res) => {
     res.status(200).json({ msg: 'Marketplace eliminado', marketPlace })
   } catch (err) {
     res.status(500).json(err)
+  }
+}
+
+exports.getProductsByMarketplace = async (req, res) => {
+  try {
+    const products = await productModel.find({ marketplace: req.params.marketplaceId })
+    res.status(200).json(products)
+  } catch (err) {
+    res.status(200).json({ msg: 'Error trying to get this products', err })
   }
 }
