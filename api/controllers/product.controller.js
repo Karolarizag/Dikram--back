@@ -5,6 +5,7 @@ const { marketPlaceModel } = require('../models/marketplace.model')
 /* PENDING TESTING */
 exports.createProduct = async (req, res) => {
   try {
+    console.log('holis')
     const product = await productModel.create(req.body)
     product.marketplace = res.locals.user.marketplace
     await product.save()
