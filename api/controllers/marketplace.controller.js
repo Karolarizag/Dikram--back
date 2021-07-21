@@ -1,5 +1,7 @@
 const { marketPlaceModel } = require('../models/marketplace.model')
 const { productModel } = require('../models/product.model')
+const { postModel } = require('../models/post.model')
+
 
 // MARKETPLACE CRUD
 
@@ -67,5 +69,15 @@ exports.getProductsByMarketplace = async (req, res) => {
     res.status(200).json(products)
   } catch (err) {
     res.status(200).json({ msg: 'Error trying to get this products', err })
+  }
+}
+
+exports.getPostsByMarketplace = async (req, res) => {
+  try {
+    const post = await postModel.find({ marketplace: req.params.marketplaceId }).populate('products')
+
+    res.status(200).json(post)
+  } catch (err) {
+    res.status(200).json({ msg: 'Error trying to get this post', err })
   }
 }

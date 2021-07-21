@@ -5,7 +5,8 @@ const {
   getMarketPlaceById,
   updateMarketPlace,
   deleteMarketPlace,
-  getProductsByMarketplace
+  getProductsByMarketplace,
+  getPostsByMarketplace
 } = require('../controllers/marketplace.controller')
 
 const { checkAuth, authSeller, authAdmin } = require('../../utils/index')
@@ -15,7 +16,8 @@ router
   .get('/', getAllMarketPlaces)
   .get('/:marketplaceId', getMarketPlaceById)
   .get('/:marketplaceId/products', getProductsByMarketplace)
+  .get('/:marketplaceId/posts', getPostsByMarketplace)
   .put('/:marketplaceId', checkAuth, authSeller, updateMarketPlace)
   .delete('/:marketplaceId', checkAuth, authSeller, deleteMarketPlace)
 
-  exports.marketplaceRouter = router
+  exports.marketplaceRouter = router 

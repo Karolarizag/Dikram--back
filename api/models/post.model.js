@@ -14,13 +14,12 @@ const commentSchema = new mongoose.Schema({
   reports: [String]
 })
 
-
 const postSchema = new mongoose.Schema({
   marketplace: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'marketplace'
   },
-  imagen: [String],
+  image: [String],
   description: String,
   comments: [commentSchema],
   products: [{

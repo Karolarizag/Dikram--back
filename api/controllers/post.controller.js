@@ -1,5 +1,7 @@
 const { postModel } = require('../models/post.model')
 const { marketPlaceModel } = require('../models/marketplace.model')
+const { productModel } = require('../models/product.model')
+
 
 exports.getAllPosts = async (req, res) => {
   try {
@@ -21,13 +23,14 @@ exports.getPostById = async (req, res) => {
 
 exports.createPost = async (req, res) => {
   try {
+    const marketPlace = await marketPlaceModel.findById(res.locals.user.marketplace)    
     const post = await postModel.create(req.body)
-    post.marketplace = res.locals.user.marketplace
-    await post.save()
-
-    const marketPlace = await marketPlaceModel.findById(res.locals.user.marketplace)
+    console.log(req.body)
     marketPlace.posts.push(post.id)
     await marketPlace.save()
+
+    post.marketplace = res.locals.user.marketplace
+    await post.save()
 
     res.status(200).json({ msg: 'Post creado correctamente', post })
   } catch (error) {
@@ -56,3 +59,4 @@ exports.deletePost = async (req, res) => {
     res.status(500).json(error)
   }
 }
+
