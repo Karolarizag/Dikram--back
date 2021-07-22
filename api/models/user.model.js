@@ -1,5 +1,20 @@
 const mongoose = require('mongoose')
 
+const cartSchema = new mongoose.Schema({
+  product: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'product'
+  },
+  marketplace: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'marketplace'
+  },
+  size: String,
+  color: String,
+  quantity: Number,
+  price: Number
+})
+
 const userSchema = new mongoose.Schema({
   firstName: String,
   lastName: String,
@@ -24,7 +39,7 @@ const userSchema = new mongoose.Schema({
   },
   birthdate: Date,
   phone: String, 
-  // cart: cartSchema,
+  cart: [cartSchema],
   history: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'sale'
@@ -47,3 +62,4 @@ const userSchema = new mongoose.Schema({
 })
 
 exports.userModel = mongoose.model('user', userSchema)
+exports.cartModel = mongoose.model('cart', cartSchema)
