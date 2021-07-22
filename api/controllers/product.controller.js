@@ -1,8 +1,6 @@
 const { productModel } = require('../models/product.model')
 const { marketPlaceModel } = require('../models/marketplace.model')
 
-
-/* PENDING TESTING */
 exports.createProduct = async (req, res) => {
   try {
     const product = await productModel.create(req.body)
@@ -16,7 +14,6 @@ exports.createProduct = async (req, res) => {
     res.status(200).json(product)
 
   } catch (err) {
-    console.log(err)
     res.status(500).json({ msg: 'Ha ocurrido un error al crear el producto', err })
   }
 }

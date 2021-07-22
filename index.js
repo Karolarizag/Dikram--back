@@ -28,7 +28,7 @@ api
         console.info('Connected to Mongo Database \n')
         console.info('>'.repeat(40))
         console.info('   Dikram Server Live')
-        console.info(`   PORT: ${process.env.SERVER_URL}${process.env.PORT}`)
+        console.info(`   PORT: ${process.env.SERVER_URL}:${process.env.PORT}`)
         console.info('>'.repeat(40) + '\n')
       })
   })

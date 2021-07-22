@@ -1,7 +1,11 @@
 const router = require('express').Router()
 
 const { 
-  createPost, updatePost, deletePost, getAllPosts, getPostById
+  createPost, 
+  updatePost, 
+  deletePost, 
+  getAllPosts, 
+  getPostById
 } = require('../controllers/post.controller')
 
 const { checkAuth, authSeller, authAdmin } = require('../../utils/index')
