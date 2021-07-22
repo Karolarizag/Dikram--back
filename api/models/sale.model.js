@@ -11,7 +11,7 @@ const saleSchema = new mongoose.Schema ({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'user'
   },
-  products: [Object],
+  cart: [Object],
   payment: Object,
   price: mongoose.Schema.Types.Decimal128,
   date: {

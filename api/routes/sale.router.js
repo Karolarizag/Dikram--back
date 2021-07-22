@@ -10,9 +10,9 @@ const {
 
 const { checkAuth, authSeller, authAdmin } = require('../../utils/index')
 
-router 
+router
   .post('/', checkAuth, createSale)
-  .get('/', checkAuth, getAllSales)
+  .get('/', checkAuth, authAdmin, getAllSales)
   .get('/:saleId', checkAuth, getSaleById)
   .put('/saleId', checkAuth, updateSale)
   .delete('/:saleId', checkAuth, deleteSale)
