@@ -1,4 +1,4 @@
-const { userModel } = require('../models/user.model')
+const { userModel, cartModel } = require('../models/user.model')
 
 exports.getUser = async (req, res) => {
   try { 
@@ -27,3 +27,35 @@ exports.deleteUser = async (req, res) => {
   }
 }
 
+exports.addToCart = async (req, res) => {
+  try {
+    const user = await userModel.findById(req.params.userId)
+    console.log(user)
+    await user.cart.push({
+      product: req.body.product,
+      marketplace: req.body.marketplace,
+      size: req.body.size,
+      color: req.body.color,
+      quantity: req.body.quantity,
+      price: req.body.price
+    })
+    await user.save()
+    console.log('done')
+    
+    res.status(200).json({ msg: `Añadido correctamente` })
+  } catch (err) {
+    res.status(500).json({ msg:'fallo al añadir al carrito',err })
+  }
+}
+
+exports.deleteFromCart = async (req, res) => {
+  try {
+    const user = await userModel.findById(req.params.userId)
+    const cart = user.cart.id(req.params.cartId)
+    await user.cart.remove(cart)
+    await user.save()
+    res.status(200).json(`carrito eliminado`)
+  } catch (err) {
+    res.status(500).json({ msg:'fallo al añadir al carrito',err })
+  }
+}
