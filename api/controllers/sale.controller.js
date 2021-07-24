@@ -41,7 +41,7 @@ exports.getSaleById = async (req, res) => {
 
 exports.updateSale = async (req, res) => {
   try {
-    const sale = await saleModel.findByIdAndDelete(req.params.saleId, req.body, { new: true, useFindAndModify: false })
+    const sale = await saleModel.findByIdAndUpdate(req.params.saleId, req.body, { new: true, useFindAndModify: false })
     res.status(200).json(sale)
   } catch (err) {
     res.status(500).json(err)
