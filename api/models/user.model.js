@@ -38,7 +38,7 @@ const userSchema = new mongoose.Schema({
     default: 'user'
   },
   birthdate: Date,
-  phone: String, 
+  phone: String,
   cart: [cartSchema],
   history: [{
     type: mongoose.Schema.Types.ObjectId,

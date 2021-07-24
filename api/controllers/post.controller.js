@@ -23,9 +23,8 @@ exports.getPostById = async (req, res) => {
 
 exports.createPost = async (req, res) => {
   try {
-    const marketPlace = await marketPlaceModel.findById(res.locals.user.marketplace)    
+    const marketPlace = await marketPlaceModel.findById(res.locals.user.marketplace)
     const post = await postModel.create(req.body)
-    console.log(req.body)
     marketPlace.posts.push(post.id)
     await marketPlace.save()
 

@@ -1,4 +1,3 @@
-const { productModel } = require('../models/product.model')
 const { saleModel } = require('../models/sale.model')
 const { userModel } = require('../models/user.model')
 const { marketPlaceModel } = require('../models/marketplace.model')
@@ -6,16 +5,16 @@ const { marketPlaceModel } = require('../models/marketplace.model')
 exports.createSale = async (req, res) => {
   try {
     const sale = await saleModel.create(req.body)
-
     const user = await userModel.findById(res.locals.user.id)
     user.history.push(sale.id)
-    await user.save()
 
     const marketplaceId = await user.cart[0].marketplace
     const marketplace = await marketPlaceModel.findById(marketplaceId)
     marketplace.sales.push(sale.id)
-    await marketplace.save()
 
+    await marketplace.save()
+    user.cart = undefined
+    await user.save()
     res.status(200).json(sale)
   } catch (err) {
     res.status(500).json(err)
@@ -30,8 +29,6 @@ exports.getAllSales = async (req, res) => {
     res.status(500).json(err)
   }
 }
-
-// ^^^^^^^^^ Funciona || Falta testear v v v v v v v v v v
 
 exports.getSaleById = async (req, res) => {
   try {
@@ -74,7 +71,7 @@ exports.deleteSale = async (req, res) => {
     }
 
     res.status(200).json(sale)
-  } catch {
+  } catch (err) {
     res.status(500).json(err)
   }
 }

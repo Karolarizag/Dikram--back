@@ -1,7 +1,7 @@
 const { userModel, cartModel } = require('../models/user.model')
 
 exports.getUser = async (req, res) => {
-  try { 
+  try {
     const user = await userModel.findById(req.params.userId)
     res.status(200).json(user)
   } catch (err) {
@@ -21,7 +21,7 @@ exports.updateUser = async (req, res) => {
 exports.deleteUser = async (req, res) => {
   try {
     const user = await userModel.deleteOne({ _id: res.locals.user._id })
-    res.status(200).json(`Tu cuenta ha sido eliminada correctamente`)
+    res.status(200).json('Tu cuenta ha sido eliminada correctamente')
   } catch (err) {
     res.status(500).json(err)
   }
@@ -39,10 +39,10 @@ exports.addToCart = async (req, res) => {
       price: req.body.price
     })
     await user.save()
-    
-    res.status(200).json({ msg: `Añadido correctamente` })
+
+    res.status(200).json({ msg: 'Añadido correctamente' })
   } catch (err) {
-    res.status(500).json({ msg:'fallo al añadir al carrito',err })
+    res.status(500).json({ msg: 'fallo al añadir al carrito', err })
   }
 }
 
@@ -52,8 +52,9 @@ exports.deleteFromCart = async (req, res) => {
     const cart = user.cart.id(req.params.cartId)
     await user.cart.remove(cart)
     await user.save()
-    res.status(200).json(`carrito eliminado`)
+    res.status(200).json('carrito eliminado')
   } catch (err) {
-    res.status(500).json({ msg:'fallo al añadir al carrito',err })
+    res.status(500).json({ msg: 'fallo al añadir al carrito', err })
   }
 }
+
