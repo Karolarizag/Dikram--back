@@ -48,17 +48,20 @@ exports.updateSale = async (req, res) => {
   }
 }
 
-exports.deleteSale = async (req, res) => {
+// NOT NEEDED
+
+/* exports.deleteSale = async (req, res) => {
   try {
     const sale = await saleModel.findByIdAndDelete(req.params.saleId)
-
+    console.log(sale)
     if (res.locals.user.id === sale.buyer) {
       const user = await userModel.findById(res.locals.user.id)
       user.history.remove(sale.id)
       await user.save()
 
       const marketplace = await userModel.findById(res.locals.user.cart.marketplace)
-      marketplace.remove(sale.id)
+      // this didn't find marketplace id
+      marketplace.sales.remove(sale.id)
       await marketplace.save()
     } else {
       const user = await userModel.findById(sale.buyer)
@@ -66,7 +69,7 @@ exports.deleteSale = async (req, res) => {
       await user.save()
 
       const marketplace = await userModel.findById(res.locals.user.marketplace)
-      marketplace.remove(sale.id)
+      marketplace.sales.remove(sale.id)
       await marketplace.save()
     }
 
@@ -74,4 +77,4 @@ exports.deleteSale = async (req, res) => {
   } catch (err) {
     res.status(500).json(err)
   }
-}
+} */
