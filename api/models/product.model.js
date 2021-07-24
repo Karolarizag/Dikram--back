@@ -19,7 +19,7 @@ const productSchema = new mongoose.Schema({
   name: String,
   image: Array,
   description: String,
-  price: mongoose.Schema.Types.Decimal128,
+  price: Number,
   marketplace: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'marketplace'
@@ -27,7 +27,7 @@ const productSchema = new mongoose.Schema({
   comments: [commentSchema],
   quantity: Number,
   rate: {
-    type: mongoose.Schema.Types.Decimal128,
+    type: Number,
     default: 0
   },
   customizable: Boolean,

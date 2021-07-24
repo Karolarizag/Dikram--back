@@ -12,8 +12,9 @@ const saleSchema = new mongoose.Schema ({
     ref: 'user'
   },
   cart: [Object],
+  //this object is a refered model from cart, change it later
   payment: Object,
-  price: mongoose.Schema.Types.Decimal128,
+  price: Number,
   date: {
     type: Date,
     default: Date.now()
