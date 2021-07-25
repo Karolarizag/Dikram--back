@@ -4,10 +4,10 @@ const {
   createSale,
   getAllSales,
   getSaleById,
-  updateSale,
+  updateSale
 } = require('../controllers/sale.controller')
 
-const { checkAuth, authSeller, authAdmin } = require('../../utils/index')
+const { checkAuth, authAdmin } = require('../../utils/index')
 
 router
   .post('/', checkAuth, createSale)
