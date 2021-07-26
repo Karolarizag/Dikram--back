@@ -6,6 +6,7 @@ const { productRouter } = require('./product.router')
 const { marketplaceRouter } = require('./marketplace.router')
 const { postRouter } = require('./post.router')
 const { saleRouter } = require('./sale.router')
+const { customRouter } = require('./custom.router')
 
 router
   .use('/auth', authRouter)
@@ -14,5 +15,6 @@ router
   .use('/marketplace', marketplaceRouter)
   .use('/post', postRouter)
   .use('/sales', saleRouter)
+  .use('/custom', customRouter)
 
 exports.router = router

@@ -7,7 +7,7 @@ const {
   getAllProduct,
 } = require('../controllers/product.controller')
 
-const { checkAuth, authSeller, authAdmin } = require('../../utils/index')
+const { checkAuth, authSeller } = require('../../utils/index')
 
 router
   .post('/', checkAuth, authSeller, createProduct)

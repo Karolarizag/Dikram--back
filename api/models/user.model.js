@@ -9,6 +9,17 @@ const cartSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'marketplace'
   },
+  custom: {
+    texture: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'texture'
+    },
+    pattern: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'patters'
+    },
+    basecolor: String
+  },
   size: String,
   color: String,
   quantity: Number,

@@ -34,6 +34,7 @@ exports.addToCart = async (req, res) => {
     await user.cart.push({
       product: req.body.product,
       marketplace: req.body.marketplace,
+      custom: req.body.custom,
       size: req.body.size,
       color: req.body.color,
       quantity: req.body.quantity,

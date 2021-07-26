@@ -1,5 +1,16 @@
 const mongoose = require('mongoose')
 
+const customSchema = new mongoose.Schema({
+  basecolor: [String],
+  texture: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'texture'
+  }],
+  pattern: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'patters'
+  }],
+})
 
 const commentSchema = new mongoose.Schema({
   user: {
@@ -31,7 +42,7 @@ const productSchema = new mongoose.Schema({
     default: 0
   },
   customizable: Boolean,
-  // customForm: [customSchema],
+  customForm: customSchema,
   date: {
     type: Date,
     default: Date.now()
@@ -46,3 +57,4 @@ const productSchema = new mongoose.Schema({
 
 
 exports.productModel = mongoose.model('product', productSchema)
+exports.customModel = mongoose.model('custom', customSchema)
