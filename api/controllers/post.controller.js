@@ -5,7 +5,7 @@ const { productModel } = require('../models/product.model')
 
 exports.getAllPosts = async (req, res) => {
   try {
-    const post = await postModel.find(req.query)
+    const post = await postModel.find(req.query).populate('marketplace')
     res.status(200).json(post)
   } catch (error) {
     res.status(500).json(error)
