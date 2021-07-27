@@ -9,7 +9,7 @@ const customSchema = new mongoose.Schema({
   pattern: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'pattern'
-  }],
+  }]
 })
 
 const commentSchema = new mongoose.Schema({

@@ -17,8 +17,7 @@ const cartSchema = new mongoose.Schema({
     pattern: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'patters'
-    },
-    basecolor: String
+    }
   },
   size: String,
   color: String,
@@ -64,8 +63,10 @@ const userSchema = new mongoose.Schema({
     ref: 'marketplace'
   }],
   // address: adressSchema,
-  notifications: [String],
-  reports: [String],
+  notifications: [{
+    type: String
+  }],
+  reports: Array,
   marketplace: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'marketplace'

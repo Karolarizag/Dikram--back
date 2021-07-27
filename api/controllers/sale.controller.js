@@ -10,10 +10,12 @@ exports.createSale = async (req, res) => {
 
     const marketplaceId = await user.cart[0].marketplace
     const marketplace = await marketPlaceModel.findById(marketplaceId)
+    const seller = await userModel.findById(marketplace.seller)
     marketplace.sales.push(sale.id)
-
+    seller.notifications.push('¡Se ha vendido un producto de tu tienda!')
+    await seller.save()
     await marketplace.save()
-    user.cart = undefined
+    user.cart = []
     await user.save()
     res.status(200).json(sale)
   } catch (err) {

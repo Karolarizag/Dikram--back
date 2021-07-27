@@ -1,7 +1,6 @@
 const { userModel } = require('../api/models/user.model')
-const bcrypt = require('bcrypt')
+// const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
-
 
 exports.checkAuth = (req, res, next) => {
   jwt.verify(req.headers.authorization, process.env.SECRET, (err, token) => {
@@ -19,25 +18,24 @@ exports.checkAuth = (req, res, next) => {
           }
         })
         .catch(err => {
-          res.status(500).json({ err: 'Issue in DB' })
+          res.status(500).json({ err: 'Issue in DB' + err })
         })
     }
   })
 }
 
-exports.authSeller =  (req, res, next) => {
-    if (res.locals.user.role === 'seller') {
-      next() 
-    } else {
+exports.authSeller = (req, res, next) => {
+  if (res.locals.user.role === 'seller') {
+    next()
+  } else {
     res.status(403).send('Access denied')
-    }
+  }
 }
 
 exports.authAdmin = (req, res, next) => {
-    if (res.locals.user.role === 'admin') {
-      next() 
-    } else {
+  if (res.locals.user.role === 'admin') {
+    next()
+  } else {
     res.status(403).send('Access denied')
-    }
+  }
 }
-

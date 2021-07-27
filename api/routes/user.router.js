@@ -8,7 +8,7 @@ const {
   deleteFromCart
 } = require('../controllers/user.controller')
 
-const { checkAuth, authSeller, authAdmin } = require('../../utils/index')
+const { checkAuth } = require('../../utils/index')
 
 router
   .get('/:userId', checkAuth, getUser)

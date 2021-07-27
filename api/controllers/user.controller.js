@@ -29,9 +29,10 @@ exports.deleteUser = async (req, res) => {
 }
 
 exports.addToCart = async (req, res) => {
+  console.log('--------\n', req.body)
   try {
     const user = await userModel.findById(req.params.userId)
-    await user.cart.push({
+    user.cart.push({
       product: req.body.product,
       marketplace: req.body.marketplace,
       custom: req.body.custom,
@@ -40,7 +41,9 @@ exports.addToCart = async (req, res) => {
       quantity: req.body.quantity,
       price: req.body.price
     })
+    console.log('--------\n', user)
     await user.save()
+    console.log('--------\n', user)
 
     res.status(200).json({ msg: 'Añadido correctamente' })
   } catch (err) {
