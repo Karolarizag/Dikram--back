@@ -9,7 +9,7 @@ const customSchema = new mongoose.Schema({
   pattern: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'patters'
-  }],
+  }]
 })
 
 const commentSchema = new mongoose.Schema({
@@ -53,8 +53,6 @@ const productSchema = new mongoose.Schema({
   materials: Array,
   tags: Array
 })
-
-
 
 exports.productModel = mongoose.model('product', productSchema)
 exports.customModel = mongoose.model('custom', customSchema)
