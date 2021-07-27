@@ -64,7 +64,7 @@ const userSchema = new mongoose.Schema({
   }],
   // address: adressSchema,
   notifications: [{
-    type: String
+    type: Object
   }],
   reports: Array,
   marketplace: {

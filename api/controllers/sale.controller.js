@@ -12,12 +12,18 @@ exports.createSale = async (req, res) => {
     const marketplace = await marketPlaceModel.findById(marketplaceId)
     const seller = await userModel.findById(marketplace.seller)
     marketplace.sales.push(sale.id)
-    seller.notifications.push('¡Se ha vendido un producto de tu tienda!')
+    
+    user.cart.forEach(p => {
+      seller.notifications.push({ msg: `¡Se han vendido ${p.quantity} productos de tu tienda!` })
+    })
+
     await seller.save()
     await marketplace.save()
-    user.cart = []
+
+    user.cart = undefined
     await user.save()
     res.status(200).json(sale)
+    // add { sale, user }
   } catch (err) {
     res.status(500).json(err)
   }

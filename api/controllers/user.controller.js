@@ -13,7 +13,7 @@ exports.getUser = async (req, res) => {
 exports.updateUser = async (req, res) => {
   try {
     const user = await userModel.findOneAndUpdate({ _id: res.locals.user._id }, req.body, { new: true })
-    res.status(200).json({ msg: 'Usuario actualizado', user })
+    res.status(200).json(user)
   } catch (err) {
     res.status(404).json(err)
   }
@@ -29,7 +29,6 @@ exports.deleteUser = async (req, res) => {
 }
 
 exports.addToCart = async (req, res) => {
-  console.log('1111')
   try {
     const user = await userModel.findById(req.params.userId)
     user.cart.push({
@@ -41,9 +40,7 @@ exports.addToCart = async (req, res) => {
       quantity: req.body.quantity,
       price: req.body.price
     })
-    console.log('>>>>>>>>>>>>>>>>>>>>>\n', user.cart)
-    await user.cart.save()
-    console.log('------------\n', user)
+    await user.save()
 
     res.status(200).json({ msg: 'Añadido correctamente' })
   } catch (err) {
@@ -61,7 +58,7 @@ exports.getCart = async (req, res) => {
     })
     const allProducts = (await Promise.all(products)).flat()
     // Erase .flat() if wants to return an Array with Arrays of each cart filled with products instead a single Array with all products of every cart.
-    res.status(200).json(allProducts)
+    res.status(200).json({allProducts, cart: user.cart})
   } catch (err) {
     res.status(500).json(err)
   }
@@ -73,7 +70,7 @@ exports.deleteFromCart = async (req, res) => {
     const cart = user.cart.id(req.params.cartId)
     await user.cart.remove(cart)
     await user.save()
-    res.status(200).json('carrito eliminado')
+    res.status(200).json({ msg: 'Carrito eliminado', user })
   } catch (err) {
     res.status(500).json({ msg: 'fallo al eleminar del carrito', err })
   }
