@@ -63,3 +63,13 @@ exports.deleteProduct = async (req, res) => {
   }
 }
 
+exports.getCustomForm = async (req, res) => {
+  try {
+    const product = await productModel.findById(req.params.productId)
+      .populate('customForm.texture')
+      .populate('customForm.pattern')
+    res.status(200).json(product)
+  } catch (err) {
+    res.status(500).json(err)
+  }
+}
