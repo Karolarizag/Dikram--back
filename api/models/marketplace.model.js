@@ -39,7 +39,7 @@ const marketPlaceSchema = new mongoose.Schema ({
   }],
   patterns: [{
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'patters'
+    ref: 'pattern'
   }],
   reports: [String]
 })
