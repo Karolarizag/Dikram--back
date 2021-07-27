@@ -4,23 +4,19 @@ const textureSchema = new mongoose.Schema({
   name: {
     type: String,
     unique: true,
-    require: true
   }, 
   image: {
     type: String,
-    require: true
   }, 
 })
 
 const patternSchema = new mongoose.Schema({
   name: {
     type: String,
-    unique: true,
-    require: true
+    unique: true
   }, 
   image: {
-    type: String,
-    require: true
+    type: String
   }, 
 })
 
