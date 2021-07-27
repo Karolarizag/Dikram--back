@@ -8,7 +8,7 @@ const customSchema = new mongoose.Schema({
   }],
   pattern: [{
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'patters'
+    ref: 'pattern'
   }],
 })
 
