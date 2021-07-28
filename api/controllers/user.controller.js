@@ -58,7 +58,7 @@ exports.getCart = async (req, res) => {
     })
     const allProducts = (await Promise.all(products)).flat()
     // Erase .flat() if wants to return an Array with Arrays of each cart filled with products instead a single Array with all products of every cart.
-    res.status(200).json({allProducts, cart: user.cart})
+    res.status(200).json({ allProducts, cart: user.cart })
   } catch (err) {
     res.status(500).json(err)
   }

@@ -12,7 +12,7 @@ exports.createSale = async (req, res) => {
     const marketplace = await marketPlaceModel.findById(marketplaceId)
     const seller = await userModel.findById(marketplace.seller)
     marketplace.sales.push(sale.id)
-    
+
     user.cart.forEach(p => {
       seller.notifications.push({ msg: `¡Se han vendido ${p.quantity} productos de tu tienda!` })
     })
